@@ -21,7 +21,8 @@ About 1.5 s after the game first shows in exclusive fullscreen, it leaves
 fullscreen and enters it again 1.5 s later, as pressing F11 twice would. The
 screen blinks once at launch and the picture then fills it. It does this once
 per launch, only in exclusive fullscreen, and does nothing if you have already
-left fullscreen yourself. Split-screen guest windows are left alone.
+left fullscreen yourself. Split-screen guest windows are left alone. On Windows
+and Linux, which don't have the bug, it does nothing.
 
 It shows in Options > Mods as "Fullscreen Fix".
 

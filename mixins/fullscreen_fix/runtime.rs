@@ -10,9 +10,9 @@ use std::time::{Duration, Instant};
 /// The mod's id, name and version.
 pub const ID: &str = "fullscreen_fix";
 pub const NAME: &str = "Fullscreen Fix";
-pub const VERSION: &str = "0.2.0";
+pub const VERSION: &str = "0.2.1";
 pub const DESCRIPTION: &str =
-    "Re-enters exclusive fullscreen once after launch, so the picture fills the screen.";
+    "On macOS, re-enters exclusive fullscreen once after launch, so the picture fills the screen.";
 
 /// How long after the window is first seen in exclusive fullscreen it leaves it,
 /// and how long after that it enters it again (macOS animates both).
@@ -36,6 +36,10 @@ thread_local! {
 }
 
 pub(super) fn frame(game: &mut crate::game::Game<'_>) {
+    // Only macOS has the stale-size bug: elsewhere the mod leaves fullscreen alone.
+    if !cfg!(target_os = "macos") {
+        return;
+    }
     // Split-screen guests size their own windows.
     if game.options.split_guest {
         return;
